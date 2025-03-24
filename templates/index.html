@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Payments</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Payment Portal</h1>
+        <form id="paymentForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="amount">Amount (₦):</label>
+            <input type="number" id="amount" required>
+
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+
+    <!-- Paystack SDK -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

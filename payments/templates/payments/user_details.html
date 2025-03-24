@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
+        input { padding: 10px; width: 300px; margin: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .submit-button { background-color: #008CBA; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Enter Your Details</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="{% url 'user_details' %}">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Full Name" required><br>
+        <input type="text" name="matric_number" placeholder="Matriculation Number" required><br>
+        <input type="text" name="registration_number" placeholder="Registration Number (Optional)"><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <button type="submit" class="submit-button">Continue</button>
+    </form>
+</body>
+</html>

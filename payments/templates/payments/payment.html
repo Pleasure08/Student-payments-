@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
+        input { padding: 10px; width: 300px; margin: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .pay-button { background-color: #008CBA; color: white; padding: 10px 20px; text-decoration: none; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Make Payment</h1>
+    <form action="{% url 'process_payment' %}" method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Enter your email" required><br>
+        <input type="number" name="amount" placeholder="Enter amount (in Naira)" required><br>
+        <button type="submit" class="pay-button">Pay Now</button>
+    </form>
+</body>
+</html>
