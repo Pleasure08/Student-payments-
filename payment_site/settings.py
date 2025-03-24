@@ -1,15 +1,17 @@
 import os
 from pathlib import Path
 
-# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security settings
-SECRET_KEY = 'sk_live_1f21061303f6198d44e0d60c2e03b4b64f258a4d'
-DEBUG = True  # Set to False in production
-ALLOWED_HOSTS = ['*']  # Modify this for security in production
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'your-secret-key'
 
-# Installed apps
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False  # Set to False for production
+
+ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com', 'your-app.onrender.com']  # Update accordingly
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,7 +22,6 @@ INSTALLED_APPS = [
     'payments',  # Your payments app
 ]
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -31,14 +32,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Root URL configuration
-ROOT_URLCONF = 'payment_site.urls'  # Updated project name
+ROOT_URLCONF = 'payment_site.urls'
 
-# Templates configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Ensure your templates are in a 'templates' directory
+        'DIRS': [BASE_DIR / 'templates'],  # If you use a global templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -51,8 +50,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI application
-WSGI_APPLICATION = 'payment_site.wsgi.application'  # Updated project name
+WSGI_APPLICATION = 'payment_site.wsgi.application'
 
 # Database configuration (Using SQLite for simplicity)
 DATABASES = {
@@ -74,23 +72,19 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
-# Static files settings
+# ** Static files configuration **
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Ensure this path is correct
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Media files (if you need file uploads)
+# Media files (if you use them)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default auto field
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Paystack settings
-PAYSTACK_PUBLIC_KEY = 'pk_live_72f3eb0020f924a29d293ddbe5c058caab352b66'
-PAYSTACK_SECRET_KEY = 'sk_live_1f21061303f6198d44e0d60c2e03b4b64f258a4d'
+# Paystack settings (update with your secret key)
+PAYSTACK_SECRET_KEY = "sk_live_1f21061303f6198d44e0d60c2e03b4b64f258a4d"
