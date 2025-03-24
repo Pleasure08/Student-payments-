@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -9,7 +10,7 @@ SECRET_KEY = 'your-secret-key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False  # Set to False for production
 
-ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com', 'your-app.onrender.com']  # Update accordingly
+ALLOWED_HOSTS = ['gpl-mini-projects.onrender.com', '127.0.0.1', 'localhost']
 
 # Application definition
 INSTALLED_APPS = [
@@ -37,7 +38,7 @@ ROOT_URLCONF = 'payment_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # If you use a global templates folder
+        'DIRS': [BASE_DIR / 'templates'],  # Global templates directory, if any
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,20 +69,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
+# Internationalization settings
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# ** Static files configuration **
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 # Media files (if you use them)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Static files settings
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Directory for your static files (e.g., CSS, JS, images)
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Destination directory for collectstatic
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
