@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<div class="status-container error">
+    <h2>⚠ Error</h2>
+    <a href="{% url 'home' %}" class="btn">Retry</a>
+</div>
+{% endblock %}

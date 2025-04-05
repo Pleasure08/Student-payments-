@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Welcome to EduPay{% endblock %}
+
+{% block content %}
+<div class="welcome">
+    <!-- Replace with your actual image in the static/images folder -->
+    <img src="{% static 'images/money.png' %}" alt="EduPay Logo" style="max-width: 150px; margin-bottom: 20px;">
+    <h1>WELCOME TO EDUPAY</h1>
+    <p>Your number one solution for online payment.</p>
+    <a href="{% url 'student_details' %}" class="btn">Get Started</a>
+</div>
+{% endblock %}
+

@@ -3,6 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('payments.urls')),  # Include payments app URLs
+    path('', include('payments.urls')),  # Link payments app
 ]
-

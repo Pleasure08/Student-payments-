@@ -1,14 +1,13 @@
 import os
 from pathlib import Path
 
-# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'your-secret-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # Set to False for production
+DEBUG = True  # For production/testing with WhiteNoise
 
 ALLOWED_HOSTS = ['gpl-mini-projects.onrender.com', '127.0.0.1', 'localhost']
 
@@ -25,6 +24,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise middleware right after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -38,15 +38,26 @@ ROOT_URLCONF = 'payment_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Global templates directory, if any
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'templates',  # Project-wide templates
+            # BASE_DIR / 'your_app_name/templates',  # Remove this line (redundant with APP_DIRS)
+        ],
+        'APP_DIRS': True,  # Automatically discovers app/templates/ directories
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',  # Required for admin
+                'django.contrib.auth.context_processors.auth',  # User object
+                'django.contrib.messages.context_processors.messages',  # Flash messages
+                'django.template.context_processors.static',  # {% static %}
+                # Add custom context processors here
             ],
+            'builtins': [  # Optional: auto-load template tags
+                'django.templatetags.static',
+            ],
+            'libraries': {  # Register custom template tags
+                # 'my_tags': 'your_app.templatetags.my_tags',
+            },
         },
     },
 ]
@@ -82,9 +93,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Static files settings
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Directory for your static files (e.g., CSS, JS, images)
+    os.path.join(BASE_DIR, 'static'),  # Ensure this path is correct
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Destination directory for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Configure WhiteNoise storage for static files caching (optional but recommended)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

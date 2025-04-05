@@ -1,16 +1,114 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
-        h2 { color: green; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful - EduPay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    body {
+      background-color: #f5f7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .success-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(67, 97, 238, 0.15);
+      width: 100%;
+      max-width: 480px;
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .success-card h1 {
+      color: var(--dark);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .success-card p {
+      color: #64748b;
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .check-icon {
+      font-size: 50px;
+      color: green;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 20px 50px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.4s;
+      display: inline-block;
+    }
+
+    .back-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 480px) {
+      .success-card {
+        padding: 30px 20px;
+      }
+
+      .success-card h1 {
+        font-size: 30px;
+      }
+
+      .back-btn {
+        font-size: 17px;
+        padding: 15px 40px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h2>Payment Successful!</h2>
-    <p>Thank you for your payment.</p>
+  <div class="success-card">
+    <i class="fas fa-check-circle check-icon"></i>
+    <h1>Payment Successful</h1>
+    <p>Your payment has been successfully processed. Thank you for choosing EduPay!</p>
+    <a href="{% url 'home' %}" class="back-btn">Go to Dashboard</a>
+  </div>
 </body>
 </html>

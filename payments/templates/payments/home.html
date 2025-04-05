@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Student Payments</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPay - Student Payment Solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .welcome-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .app-logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #4a6bff;
+            margin: 0 auto 25px;
+            display: block;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            color: #718096;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .get-started-btn {
+            background: #4a6bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .get-started-btn:hover {
+            background: #3a5bef;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Student Payments</h1>
-    <p>Start making secure transactions with Paystack.</p>
+    <div class="welcome-card">
+        <!-- Image from WhatsApp -->
+        <img src="edupay-logo.jpg" alt="EduPay Logo" class="app-logo">
+        
+        <h1>WELCOME TO EDUPAY</h1>
+        <p>Your number one solution for online payment.</p>
+        <button class="get-started-btn">Get Started</button>
+    </div>
 </body>
 </html>

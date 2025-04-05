@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="status-container success">
+    <h2>✔ Payment Successful</h2>
+    <a href="{% url 'download_receipt' %}" class="btn">Download Receipt</a>
+</div>
+{% endblock %}
+

@@ -4,10 +4,11 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 
+# Home Page
 def home(request):
     return render(request, 'payments/index.html')
 
-# User Details view – displays form and processes input
+# User Details View – Displays form and processes input
 def user_details(request):
     if request.method == "POST":
         # Retrieve form data from the user details form
@@ -21,7 +22,7 @@ def user_details(request):
             error = "Please fill in all required fields (Name, Matric Number, and Email)."
             return render(request, "payments/user_details.html", {"error": error})
 
-        # Optionally store details in the session for later steps
+        # Store details in the session for later steps
         request.session["user_details"] = {
             "name": name,
             "matric_number": matric_number,
@@ -29,13 +30,12 @@ def user_details(request):
             "email": email,
         }
 
-        # Redirect to the payment purpose page after successful input
+        # Redirect to the payment purpose page
         return redirect("payment_purpose")
-    else:
-        # For GET requests, simply render the form
-        return render(request, "payments/user_details.html")
+    
+    return render(request, "payments/user_details.html")
 
-# Payment Purpose view – collects the reason for payment
+# Payment Purpose View – Collects the reason for payment
 def payment_purpose(request):
     if request.method == "POST":
         purpose = request.POST.get("purpose")
@@ -43,19 +43,19 @@ def payment_purpose(request):
             error = "Please enter the purpose of your payment."
             return render(request, "payments/payment_purpose.html", {"error": error})
 
-        # Store the purpose in session (optional)
+        # Store purpose in session
         request.session["payment_purpose"] = purpose
 
-        # Redirect to the payment page after this step
+        # Redirect to the payment page
         return redirect("payment_page")
-    else:
-        return render(request, "payments/payment_purpose.html")
 
-# Payment page view – displays the payment form to be submitted for Paystack processing
+    return render(request, "payments/payment_purpose.html")
+
+# Payment Page View – Displays the payment form to be submitted for Paystack processing
 def payment_page(request):
     return render(request, 'payments/payment.html')
 
-# Process Payment view – sends data to Paystack and redirects to the Paystack payment page
+# Process Payment View – Sends data to Paystack and redirects to the Paystack payment page
 def process_payment(request):
     if request.method == "POST":
         # Retrieve email and amount from the payment form
@@ -85,13 +85,13 @@ def process_payment(request):
         res = response.json()
 
         if res.get("status") == True:
-            # Redirect the user to Paystack's authorization URL
+            # Redirect user to Paystack's authorization URL
             return redirect(res["data"]["authorization_url"])
         else:
             return JsonResponse({"error": "Payment initialization failed. Please try again."}, status=400)
-    else:
-        return JsonResponse({"error": "Invalid request method."}, status=400)
 
-# Payment success view – displays a simple success page after payment completion
+    return JsonResponse({"error": "Invalid request method."}, status=400)
+
+# Payment Success View – Displays a success page after payment completion
 def payment_success(request):
     return render(request, "payments/payment_success.html")

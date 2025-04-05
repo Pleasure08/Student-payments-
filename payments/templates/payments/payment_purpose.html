@@ -1,26 +1,163 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Purpose</title>
+    <title>Enter Payment Purpose | EduPay Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
-        textarea { padding: 10px; width: 300px; height: 100px; margin: 10px; border-radius: 5px; border: 1px solid #ccc; }
-        .submit-button { background-color: #008CBA; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        .error { color: red; }
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0.05) 90%);
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(67, 97, 238, 0.15);
+            width: 100%;
+            max-width: 500px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--gradient);
+            opacity: 0.05;
+            z-index: 0;
+            transform: rotate(15deg);
+        }
+
+        h2 {
+            color: var(--dark);
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-next {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-next::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-next:hover::after {
+            transform: translateX(100%);
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 40px 30px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Payment Purpose</h1>
-    <p>Please enter the purpose of your payment:</p>
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-    <form method="POST" action="{% url 'payment_purpose' %}">
-        {% csrf_token %}
-        <textarea name="purpose" placeholder="e.g., Tuition fee, Library fine, etc." required></textarea><br>
-        <button type="submit" class="submit-button">Proceed</button>
-    </form>
+    <div class="form-container">
+        <h2>What Are You Paying For?</h2>
+
+        <form method="post" action="{% url 'payment_page' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="purpose">Enter your payment purpose:</label>
+                <input type="text" name="purpose" id="purpose" class="form-control" placeholder="e.g. Class dues,Manuals,Lab Coats" required>
+            </div>
+
+            <button type="submit" class="btn-next">
+                Proceed to Payment <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+            </button>
+        </form>
+    </div>
 </body>
 </html>

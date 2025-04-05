@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Payment Failed{% endblock %}
+
+{% block content %}
+<div class="status-container failed">
+    <h2>✖ Payment Failed</h2>
+    <a href="{% url 'payment_details' %}" class="btn">Back</a>
+</div>
+{% endblock %}
